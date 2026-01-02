@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apna Project Patna - Premium Property Listings</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary-color: #10b981;
+            --accent-color: #f59e0b;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f9fafb;
+            --border-color: #e5e7eb;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--bg-secondary);
+        }
+
+        /* Header Styles */
+        header {
+            background: var(--bg-primary);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .user-menu {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* Enhanced Hero Section */
+        .hero {
+            position: relative;
+            height: 600px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/jpeg;base64,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');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            animation: slowZoom 20s ease-in-out infinite alternate;
+        }
+
+        @keyframes slowZoom {
+            0% {
+                transform: scale(1);
+            }
+            100% {
+                transform: scale(1.1);
+            }
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, 
+                rgba(37, 99, 235, 0.85) 0%, 
+                rgb(98 100 108 / 46%) 50%,
+                rgba(16, 185, 129, 0.65) 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: white;
+            max-width: 900px;
+            padding: 0 2rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            font-weight: 300;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+            animation: fadeIn 1s ease-out 0.5s both;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero-cta {
+            margin-top: 2rem;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-hero {
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-hero:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-hero-primary {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        .btn-hero-primary:hover {
+            background: var(--bg-secondary);
+        }
+
+        .btn-hero-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-hero-secondary:hover {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        /* Search Section */
+        .search-section {
+            background: var(--bg-primary);
+            padding: 2rem 1.5rem;
+            box-shadow: var(--shadow-md);
+            margin-top: -3rem;
+            border-radius: 1rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        .search-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .search-tab {
+            padding: 0.75rem 1.5rem;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            cursor: pointer;
+            position: relative;
+            transition: color 0.2s;
+        }
+
+        .search-tab.active {
+            color: var(--primary-color);
+        }
+
+        .search-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--primary-color);
+        }
+
+        .search-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr auto auto;
+            gap: 1rem;
+            align-items: end;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-control {
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .btn-search {
+            padding: 0.75rem 2rem;
+            background: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-search:hover {
+            background: #059669;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Filters Section */
+        .filters-section {
+            max-width: 1280px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .filter-chips {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-chip {
+            padding: 0.5rem 1rem;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 2rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-chip:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .filter-chip.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        /* Property Cards */
+        .properties-section {
+            max-width: 1280px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .view-toggle {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .view-btn {
+            padding: 0.5rem;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 0.25rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .view-btn.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .properties-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .property-card {
+            background: var(--bg-primary);
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .property-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .property-image {
+            position: relative;
+            height: 200px;
+            background: linear-gradient(135deg, #e5e7eb, #f3f4f6);
+            overflow: hidden;
+        }
+
+        .property-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .match-score {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 0.5rem 0.75rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .match-score.high {
+            color: var(--secondary-color);
+        }
+
+        .match-score.medium {
+            color: var(--accent-color);
+        }
+
+        .match-score.low {
+            color: #ef4444;
+        }
+
+        .verified-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: var(--secondary-color);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .property-details {
+            padding: 1.25rem;
+        }
+
+        .property-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .property-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .property-location {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+
+        .property-features {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .property-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .tag {
+            padding: 0.25rem 0.75rem;
+            background: var(--bg-secondary);
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .property-actions {
+            display: flex;
+            gap: 0.75rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: 0.5rem;
+            background: var(--bg-secondary);
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.25rem;
+        }
+
+        .action-btn:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .action-btn.primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .action-btn.primary:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Comparison Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--bg-primary);
+            border-radius: 1rem;
+            max-width: 90%;
+            max-height: 90%;
+            overflow: auto;
+            position: relative;
+        }
+
+        .modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-secondary);
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .comparison-table th {
+            background: var(--bg-secondary);
+            font-weight: 600;
+        }
+
+        /* Notification Toast */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--text-primary);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: var(--shadow-lg);
+            transform: translateX(400px);
+            transition: transform 0.3s;
+            z-index: 2000;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-primary);
+            color: white;
+            padding: 3rem 1.5rem 1.5rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: #9ca3af;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #374151;
+            color: #9ca3af;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero {
+                height: 500px;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .hero-stats {
+                gap: 1.5rem;
+            }
+            
+            .stat-number {
+                font-size: 2rem;
+            }
+            
+            .search-form {
+                grid-template-columns: 1fr;
+            }
+            
+            .properties-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .filter-chips {
+                overflow-x: auto;
+                flex-wrap: nowrap;
+                padding-bottom: 0.5rem;
+            }
+        }
+
+        /* Loading Animation */
+        .skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% {
+                background-position: 200% 0;
+            }
+            100% {
+                background-position: -200% 0;
+            }
+        }
+
+        /* Icons */
+        .icon {
+            display: inline-block;
+            width: 1em;
+            height: 1em;
+            text-align: center;
+        }
+
+        /* Floating elements animation */
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="#" class="logo">🏢 Apna Project Patna</a>
+            <div class="nav-links">
+                <a href="#" onclick="showSection('buy')">Buy</a>
+                <a href="#" onclick="showSection('rent')">Rent</a>
+                <a href="#" onclick="showSection('commercial')">Commercial</a>
+                <a href="#" onclick="showSection('invest')">Invest</a>
+            </div>
+            <div class="user-menu">
+                <button class="btn btn-secondary" onclick="showNotifications()">
+                    🔔 <span class="badge">3</span>
+                </button>
+                <button class="btn btn-primary" onclick="showLogin()">Sign In</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Enhanced Hero Section -->
+    <section class="hero">
+        <div class="hero-background"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Find Your Dream Property in Patna</h1>
+            <p class="hero-subtitle">Personalized property insights, verified listings, and intelligent tools for confident residential and commercial choices.</p>
+            
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number" data-count="2500">0</span>
+                    <span class="stat-label">Properties</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="98">0</span>
+                    <span class="stat-label">% Verified</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="1500">0</span>
+                    <span class="stat-label">Happy Clients</span>
+                </div>
+            </div>
+            
+            <div class="hero-cta">
+                <button class="btn btn-hero btn-hero-primary" onclick="scrollToSearch()">
+                    Start Searching
+                </button>
+                <button class="btn btn-hero btn-hero-secondary" onclick="showVideoTour()">
+                    Watch Video Tour
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <section class="search-section" id="searchSection">
+        <div class="search-tabs">
+            <button class="search-tab active" onclick="switchTab(this, 'residential')">Residential</button>
+            <button class="search-tab" onclick="switchTab(this, 'commercial')">Commercial</button>
+            <button class="search-tab" onclick="switchTab(this, 'plots')">Plots & Land</button>
+        </div>
+        <form class="search-form" onsubmit="searchProperties(event)">
+            <div class="form-group">
+                <label>Location</label>
+                <input type="text" class="form-control" placeholder="Enter locality, landmark..." id="locationInput">
+            </div>
+            <div class="form-group">
+                <label>Property Type</label>
+                <select class="form-control" id="propertyType">
+                    <option>All Types</option>
+                    <option>Apartment</option>
+                    <option>House</option>
+                    <option>Villa</option>
+                    <option>Studio</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Budget</label>
+                <select class="form-control" id="budget">
+                    <option>Any Budget</option>
+                    <option>Under 20 Lakhs</option>
+                    <option>20-50 Lakhs</option>
+                    <option>50 Lakhs - 1 Cr</option>
+                    <option>Above 1 Cr</option>
+                </select>
+            </div>
+            <button type="submit" class="btn-search">
+                🔍 Search Properties
+            </button>
+        </form>
+    </section>
+
+    <!-- Filters Section -->
+    <section class="filters-section">
+        <div class="filter-chips">
+            <span style="margin-right: 1rem; font-weight: 500;">Quick Filters:</span>
+            <div class="filter-chip active" onclick="toggleFilter(this)">Verified Only</div>
+            <div class="filter-chip" onclick="toggleFilter(this)">New Listings</div>
+            <div class="filter-chip" onclick="toggleFilter(this)">Ready to Move</div>
+            <div class="filter-chip" onclick="toggleFilter(this)">Under Construction</div>
+            <div class="filter-chip" onclick="toggleFilter(this)">Negotiable</div>
+            <div class="filter-chip" onclick="toggleFilter(this)">With Photos</div>
+            <div class="filter-chip" onclick="toggleFilter(this)">With Videos</div>
+        </div>
+    </section>
+
+    <!-- Properties Section -->
+    <section class="properties-section">
+        <div class="section-header">
+            <h2 class="section-title">Recommended Properties for You</h2>
+            <div class="view-toggle">
+                <button class="view-btn active" onclick="setView('grid')">⊞</button>
+                <button class="view-btn" onclick="setView('list')">☰</button>
+            </div>
+        </div>
+        <div class="properties-grid" id="propertiesGrid">
+            <!-- Properties will be dynamically loaded here -->
+        </div>
+    </section>
+
+    <!-- Comparison Modal -->
+    <div class="modal" id="comparisonModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Compare Properties</h2>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <table class="comparison-table" id="comparisonTable">
+                    <!-- Comparison data will be loaded here -->
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About Apna Project Patna</h3>
+                <p>Your trusted partner for finding the perfect property in Patna. AI-powered recommendations and verified listings.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">How It Works</a></li>
+                    <li><a href="#">Pricing</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <ul>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">LinkedIn</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Apna Project Patna. All rights reserved By Zannatul.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Sample property data
+        const properties = [
+            {
+                id: 1,
+                title: "Premium 3BHK Apartment in Patliputra",
+                location: "Patliputra Colony",
+                price: "₹85 Lakhs",
+                image: "https://i.postimg.cc/zBq3Mwmv/Premium-3BHK-Apartment-in-Patliputra.png",
+                matchScore: 92,
+                verified: true,
+                bedrooms: 3,
+                bathrooms: 2,
+                area: "1450 sqft",
+                tags: ["New Listing", "Ready to Move", "North Facing"],
+                features: ["Parking", "Gym", "Pool"]
+            },
+            {
+                id: 2,
+                title: "Spacious 2BHK in Kankarbagh",
+                location: "Kankarbagh",
+                price: "₹45 Lakhs",
+                image: "https://i.postimg.cc/ZqGmWpFn/Spacious-2BHK-in-Kankarbagh1.png",
+                matchScore: 78,
+                verified: true,
+                bedrooms: 2,
+                bathrooms: 2,
+                area: "980 sqft",
+                tags: ["Negotiable", "Semi-Furnished"],
+                features: ["Parking", "Power Backup"]
+            },
+            {
+                id: 3,
+                title: "Commercial Space on Boring Road",
+                location: "Boring Road",
+                price: "₹2.5 Cr",
+                image: "https://i.postimg.cc/9F2wKq9z/Commercial-Space-on-Boring-Road.png",
+                matchScore: 65,
+                verified: false,
+                bedrooms: 0,
+                bathrooms: 2,
+                area: "2500 sqft",
+                tags: ["Commercial", "Ground Floor"],
+                features: ["Parking", "24/7 Access"]
+            },
+            {
+                id: 4,
+                title: "Luxury 4BHK Villa in Buddha Colony",
+                location: "Buddha Colony",
+                price: "₹3.2 Cr",
+                image: "https://picsum.photos/seed/prop4/400/300",
+                matchScore: 88,
+                verified: true,
+                bedrooms: 4,
+                bathrooms: 4,
+                area: "3200 sqft",
+                tags: ["Luxury", "Garden", "Private Pool"],
+                features: ["Garden", "Pool", "Servant Room"]
+            },
+            {
+                id: 5,
+                title: "Budget 1BHK in Rajendra Nagar",
+                location: "Rajendra Nagar",
+                price: "₹22 Lakhs",
+                image: "https://i.postimg.cc/nL5MVXPm/Budget-1BHK-in-Rajendra-Nagar.png",
+                matchScore: 71,
+                verified: true,
+                bedrooms: 1,
+                bathrooms: 1,
+                area: "550 sqft",
+                tags: ["Budget Friendly", "Immediate Possession"],
+                features: ["Parking"]
+            },
+            {
+                id: 6,
+                title: "Office Space in Fraser Road",
+                location: "Fraser Road",
+                price: "₹1.8 Cr",
+                image: "https://i.postimg.cc/SR6BPPMw/Office-Space-in-Fraser-Road.png",
+                matchScore: 82,
+                verified: true,
+                bedrooms: 0,
+                bathrooms: 3,
+                area: "1800 sqft",
+                tags: ["Prime Location", "Furnished"],
+                features: ["Parking", "Conference Room", "Pantry"]
+            }
+        ];
+
+        let compareList = [];
+        let currentView = 'grid';
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProperties();
+            initializeAnimations();
+            animateCounters();
+        });
+
+        // Animate counter numbers
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-number');
+            const speed = 200;
+            
+            counters.forEach(counter => {
+                const animate = () => {
+                    const value = +counter.getAttribute('data-count');
+                    const data = +counter.innerText;
+                    const time = value / speed;
+                    
+                    if (data < value) {
+                        counter.innerText = Math.ceil(data + time);
+                        setTimeout(animate, 1);
+                    } else {
+                        counter.innerText = value;
+                    }
+                }
+                
+                // Start animation when element is in viewport
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            animate();
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                });
+                
+                observer.observe(counter);
+            });
+        }
+
+        // Load properties into the grid
+        function loadProperties() {
+            const grid = document.getElementById('propertiesGrid');
+            grid.innerHTML = '';
+            
+            properties.forEach(property => {
+                const card = createPropertyCard(property);
+                grid.appendChild(card);
+            });
+        }
+
+        // Create property card element
+        function createPropertyCard(property) {
+            const card = document.createElement('div');
+            card.className = 'property-card';
+            card.innerHTML = `
+                <div class="property-image">
+                    <img src="${property.image}" alt="${property.title}" loading="lazy">
+                    <div class="match-score ${getMatchScoreClass(property.matchScore)}">
+                        ⭐ ${property.matchScore}% Match
+                    </div>
+                    ${property.verified ? '<div class="verified-badge">✓ Verified</div>' : ''}
+                </div>
+                <div class="property-details">
+                    <div class="property-price">${property.price}</div>
+                    <div class="property-title">${property.title}</div>
+                    <div class="property-location">
+                        📍 ${property.location}
+                    </div>
+                    <div class="property-features">
+                        <span class="feature">🛏️ ${property.bedrooms} Beds</span>
+                        <span class="feature">🚿 ${property.bathrooms} Baths</span>
+                        <span class="feature">📐 ${property.area}</span>
+                    </div>
+                    <div class="property-tags">
+                        ${property.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                    </div>
+                    <div class="property-actions">
+                        <button class="action-btn" onclick="saveProperty(${property.id})">
+                            ❤️ Save
+                        </button>
+                        <button class="action-btn" onclick="shareProperty(${property.id})">
+                            📤 Share
+                        </button>
+                        <button class="action-btn" onclick="addToCompare(${property.id})">
+                            ⚖️ Compare
+                        </button>
+                        <button class="action-btn primary" onclick="contactOwner(${property.id})">
+                            💬 Contact
+                        </button>
+                    </div>
+                </div>
+            `;
+            return card;
+        }
+
+        // Get match score class for styling
+        function getMatchScoreClass(score) {
+            if (score >= 80) return 'high';
+            if (score >= 60) return 'medium';
+            return 'low';
+        }
+
+        // Scroll to search section
+        function scrollToSearch() {
+            document.getElementById('searchSection').scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'center'
+            });
+        }
+
+        // Show video tour
+        function showVideoTour() {
+            showToast('Video tour feature coming soon!');
+        }
+
+        // Switch between tabs
+        function switchTab(tab, type) {
+            document.querySelectorAll('.search-tab').forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            showToast(`Switched to ${type} properties`);
+        }
+
+        // Toggle filter chips
+        function toggleFilter(chip) {
+            chip.classList.toggle('active');
+            applyFilters();
+        }
+
+        // Apply filters
+        function applyFilters() {
+            const activeFilters = document.querySelectorAll('.filter-chip.active');
+            showToast(`Applied ${activeFilters.length} filters`);
+        }
+
+        // Search properties
+        function searchProperties(event) {
+            event.preventDefault();
+            const location = document.getElementById('locationInput').value;
+            const type = document.getElementById('propertyType').value;
+            const budget = document.getElementById('budget').value;
+            
+            showToast(`Searching for properties in ${location || 'Patna'}...`);
+            
+            setTimeout(() => {
+                loadProperties();
+                showToast(`Found ${properties.length} properties matching your criteria`);
+            }, 1000);
+        }
+
+        // Save property
+        function saveProperty(id) {
+            const property = properties.find(p => p.id === id);
+            showToast(`Saved: ${property.title}`);
+        }
+
+        // Share property
+        function shareProperty(id) {
+            const property = properties.find(p => p.id === id);
+            if (navigator.share) {
+                navigator.share({
+                    title: property.title,
+                    text: `Check out this property: ${property.title} in ${property.location}`,
+                    url: window.location.href
+                });
+            } else {
+                showToast('Link copied to clipboard!');
+            }
+        }
+
+        // Add to compare list
+        function addToCompare(id) {
+            if (compareList.length >= 3) {
+                showToast('You can compare maximum 3 properties');
+                return;
+            }
+            
+            if (!compareList.includes(id)) {
+                compareList.push(id);
+                showToast(`Added to compare (${compareList.length}/3)`);
+                
+                if (compareList.length >= 2) {
+                    showComparison();
+                }
+            } else {
+                showToast('Already in compare list');
+            }
+        }
+
+        // Show comparison modal
+        function showComparison() {
+            const modal = document.getElementById('comparisonModal');
+            const table = document.getElementById('comparisonTable');
+            
+            const compareProperties = properties.filter(p => compareList.includes(p.id));
+            
+            let tableHTML = `
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        ${compareProperties.map(p => `<th>${p.title}</th>`).join('')}
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Price</td>
+                        ${compareProperties.map(p => `<td>${p.price}</td>`).join('')}
+                    </tr>
+                    <tr>
+                        <td>Location</td>
+                        ${compareProperties.map(p => `<td>${p.location}</td>`).join('')}
+                    </tr>
+                    <tr>
+                        <td>Area</td>
+                        ${compareProperties.map(p => `<td>${p.area}</td>`).join('')}
+                    </tr>
+                    <tr>
+                        <td>Bedrooms</td>
+                        ${compareProperties.map(p => `<td>${p.bedrooms}</td>`).join('')}
+                    </tr>
+                    <tr>
+                        <td>Bathrooms</td>
+                        ${compareProperties.map(p => `<td>${p.bathrooms}</td>`).join('')}
+                    </tr>
+                    <tr>
+                        <td>Match Score</td>
+                        ${compareProperties.map(p => `<td>${p.matchScore}%</td>`).join('')}
+                    </tr>
+                    <tr>
+                        <td>Verified</td>
+                        ${compareProperties.map(p => `<td>${p.verified ? '✓' : '✗'}</td>`).join('')}
+                    </tr>
+                </tbody>
+            `;
+            
+            table.innerHTML = tableHTML;
+            modal.classList.add('active');
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('comparisonModal').classList.remove('active');
+        }
+
+        // Contact owner
+        function contactOwner(id) {
+            const property = properties.find(p => p.id === id);
+            showToast(`Opening chat for ${property.title}...`);
+        }
+
+        // Show notifications
+        function showNotifications() {
+            showToast('You have 3 new notifications');
+        }
+
+        // Show login
+        function showLogin() {
+            showToast('Login feature coming soon!');
+        }
+
+        // Show section
+        function showSection(section) {
+            showToast(`Navigating to ${section} section`);
+        }
+
+        // Set view mode
+        function setView(view) {
+            currentView = view;
+            document.querySelectorAll('.view-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            const grid = document.getElementById('propertiesGrid');
+            if (view === 'list') {
+                grid.style.gridTemplateColumns = '1fr';
+            } else {
+                grid.style.gridTemplateColumns = 'repeat(auto-fill, minmax(350px, 1fr))';
+            }
+        }
+
+        // Show toast notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Initialize animations
+        function initializeAnimations() {
+            // Add smooth scroll behavior
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+
+            // Add parallax effect to hero background
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const heroBackground = document.querySelector('.hero-background');
+                if (heroBackground) {
+                    heroBackground.style.transform = `translateY(${scrolled * 0.5}px) scale(${1 + scrolled * 0.0005})`;
+                }
+            });
+
+            // Add intersection observer for fade-in animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.property-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'all 0.5s ease';
+                observer.observe(card);
+            });
+        }
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth < 768) {
+                document.getElementById('propertiesGrid').style.gridTemplateColumns = '1fr';
+            }
+        });
+
+        // Add keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+            if (e.ctrlKey && e.key === 'k') {
+                e.preventDefault();
+                document.getElementById('locationInput').focus();
+            }
+        });
+    </script>
+</body>
+</html>
